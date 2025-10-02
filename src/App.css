@@ -1,0 +1,62 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Ensure smooth transitions for all elements */
+* {
+  transition: all var(--transition-normal);
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--color-bright-yellow-green);
+  outline-offset: 2px;
+}
+
+/* Hide focus outline for mouse users */
+.mouse-user *:focus {
+  outline: none;
+}
+
+/* Loading animation utility */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--color-bright-yellow-green);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error state styling */
+.error {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-sm) 0;
+}
+
+/* Success state styling */
+.success {
+  color: var(--color-bright-yellow-green);
+  background-color: rgba(230, 244, 0, 0.1);
+  border: 1px solid rgba(230, 244, 0, 0.3);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-sm) 0;
+}
