@@ -18,7 +18,7 @@ A modern React.js website for NASA's Space Biology Knowledge Graph with dark blu
 
 - [x] Scaffold the Project: Created Vite React project successfully
 
-- [x] Customize the Project: Created modern React components with NASA space biology theme including Header, Hero, KnowledgeGraph, Welcome, and Footer components with animations and responsive design
+- [x] Customize the Project: Created modern React components with NASA space biology theme including Header, Hero, Welcome, and Footer components with animations and responsive design
 
 - [x] Install Required Extensions: No additional extensions required
 

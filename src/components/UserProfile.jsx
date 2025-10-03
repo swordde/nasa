@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../hooks/useAuth.jsx';
+import { useAuth } from '../hooks/useAuth';
 import './UserProfile.css';
 
 const UserProfile = () => {
@@ -269,230 +269,262 @@ const UserProfile = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="toggle-form">
-                <p>
-                  {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-                  <button 
-                    className="link-btn"
-                    onClick={() => setIsSignUp(!isSignUp)}
-                  >
-                    {isSignUp ? 'Sign In' : 'Sign Up'}
-                  </button>
-                </p>
-              </div>
             </div>
           </div>
 
-          {/* Right side - Sign Up Form */}
+          {/* Right side - Authentication Form */}
           <div className="profile-form fade-in-right">
             <div className="form-container">
-              <div className="form-header">
-                <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
-                <p>
-                  {isSignUp 
-                    ? 'Create your account to get started' 
-                    : 'Welcome back! Please sign in to your account'
-                  }
-                </p>
-              </div>
-
-              {/* Error display */}
-              {error && (
-                <div className="error-message">
-                  <span className="error-icon">⚠️</span>
-                  <span>{error}</span>
+              <div className="auth-container">
+                <div className="auth-tabs">
                   <button 
-                    className="error-close"
-                    onClick={clearError}
+                    className={`auth-tab ${!isSignUp ? 'active' : ''}`}
+                    onClick={() => setIsSignUp(false)}
+                    aria-label="Sign In"
                   >
-                    ×
+                    Sign In
+                  </button>
+                  <button 
+                    className={`auth-tab ${isSignUp ? 'active' : ''}`}
+                    onClick={() => setIsSignUp(true)}
+                    aria-label="Sign Up"
+                  >
+                    Sign Up
                   </button>
                 </div>
-              )}
+                
+                <div className="form-header">
+                  <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+                  <p>
+                    {isSignUp 
+                      ? 'Join the NASA Space Biology research community' 
+                      : 'Sign in to access your research dashboard'
+                    }
+                  </p>
+                </div>
 
-              <form onSubmit={handleSubmit} className="auth-form">
-                {isSignUp && (
-                  <>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="firstName">First Name</label>
-                        <input
-                          type="text"
-                          id="firstName"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                          className={`form-input ${validationErrors.firstName ? 'error' : ''}`}
-                          disabled={isSubmitting}
-                        />
-                        {validationErrors.firstName && (
-                          <span className="field-error">{validationErrors.firstName}</span>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="lastName">Last Name</label>
-                        <input
-                          type="text"
-                          id="lastName"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                          className={`form-input ${validationErrors.lastName ? 'error' : ''}`}
-                          disabled={isSubmitting}
-                        />
-                        {validationErrors.lastName && (
-                          <span className="field-error">{validationErrors.lastName}</span>
-                        )}
-                      </div>
-                    </div>
-                  </>
+                {/* Error display */}
+                {error && (
+                  <div className="error-message">
+                    <span className="error-icon">⚠️</span>
+                    <span>{error}</span>
+                    <button 
+                      className="error-close"
+                      onClick={clearError}
+                    >
+                      ×
+                    </button>
+                  </div>
                 )}
 
-                <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className={`form-input ${validationErrors.email ? 'error' : ''}`}
-                    placeholder="your.email@institution.edu"
-                    disabled={isSubmitting}
-                  />
-                  {validationErrors.email && (
-                    <span className="field-error">{validationErrors.email}</span>
+                <form onSubmit={handleSubmit} className="auth-form">
+                  {isSignUp && (
+                    <>
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="firstName">First Name</label>
+                          <div className="input-with-icon">
+                            <span className="input-icon">👤</span>
+                            <input
+                              type="text"
+                              id="firstName"
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={handleInputChange}
+                              required
+                              className={`form-input ${validationErrors.firstName ? 'error' : ''}`}
+                              disabled={isSubmitting}
+                            />
+                          </div>
+                          {validationErrors.firstName && (
+                            <span className="field-error">{validationErrors.firstName}</span>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="lastName">Last Name</label>
+                          <div className="input-with-icon">
+                            <span className="input-icon">👤</span>
+                            <input
+                              type="text"
+                              id="lastName"
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={handleInputChange}
+                              required
+                              className={`form-input ${validationErrors.lastName ? 'error' : ''}`}
+                              disabled={isSubmitting}
+                            />
+                          </div>
+                          {validationErrors.lastName && (
+                            <span className="field-error">{validationErrors.lastName}</span>
+                          )}
+                        </div>
+                      </div>
+                    </>
                   )}
-                </div>
 
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                    className={`form-input ${validationErrors.password ? 'error' : ''}`}
-                    placeholder="Enter your password"
-                    disabled={isSubmitting}
-                  />
-                  {validationErrors.password && (
-                    <span className="field-error">{validationErrors.password}</span>
-                  )}
-                </div>
-
-                {isSignUp && (
-                  <>
-                    <div className="form-group">
-                      <label htmlFor="confirmPassword">Confirm Password</label>
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
+                    <div className="input-with-icon">
+                      <span className="input-icon">📧</span>
                       <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className={`form-input ${validationErrors.confirmPassword ? 'error' : ''}`}
-                        placeholder="Confirm your password"
+                        className={`form-input ${validationErrors.email ? 'error' : ''}`}
+                        placeholder="your.email@institution.edu"
                         disabled={isSubmitting}
                       />
-                      {validationErrors.confirmPassword && (
-                        <span className="field-error">{validationErrors.confirmPassword}</span>
-                      )}
                     </div>
+                    {validationErrors.email && (
+                      <span className="field-error">{validationErrors.email}</span>
+                    )}
+                  </div>
 
-                    <div className="form-group">
-                      <label htmlFor="institution">Institution</label>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <div className="input-with-icon">
+                      <span className="input-icon">🔒</span>
                       <input
-                        type="text"
-                        id="institution"
-                        name="institution"
-                        value={formData.institution}
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
                         onChange={handleInputChange}
-                        className="form-input"
-                        placeholder="Your university or organization"
+                        required
+                        className={`form-input ${validationErrors.password ? 'error' : ''}`}
+                        placeholder="Enter your password"
                         disabled={isSubmitting}
                       />
                     </div>
-
-                    <div className="form-group">
-                      <label htmlFor="researchArea">Research Area</label>
-                      <select
-                        id="researchArea"
-                        name="researchArea"
-                        value={formData.researchArea}
-                        onChange={handleInputChange}
-                        className="form-input"
-                        disabled={isSubmitting}
-                      >
-                        <option value="">Select your research area</option>
-                        <option value="astrobiology">Astrobiology</option>
-                        <option value="plant-biology">Plant Biology</option>
-                        <option value="microgravity">Microgravity Research</option>
-                        <option value="radiation-biology">Radiation Biology</option>
-                        <option value="cellular-biology">Cellular Biology</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </>
-                )}
-
-                {!isSignUp && (
-                  <div className="form-options">
-                    <label className="checkbox-label">
-                      <input type="checkbox" disabled={isSubmitting} />
-                      <span className="checkmark"></span>
-                      Remember me
-                    </label>
-                    <a href="#" className="forgot-password">Forgot password?</a>
+                    {validationErrors.password && (
+                      <span className="field-error">{validationErrors.password}</span>
+                    )}
                   </div>
-                )}
 
-                <button 
-                  type="submit" 
-                  className="btn btn-primary submit-btn glow"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <span className="loading-text">
-                      <span className="loading-spinner-small"></span>
-                      {isSignUp ? 'Creating Account...' : 'Signing In...'}
-                    </span>
-                  ) : (
-                    isSignUp ? 'Create Account' : 'Sign In'
+                  {isSignUp && (
+                    <>
+                      <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <div className="input-with-icon">
+                          <span className="input-icon">🔒</span>
+                          <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleInputChange}
+                            required
+                            className={`form-input ${validationErrors.confirmPassword ? 'error' : ''}`}
+                            placeholder="Confirm your password"
+                            disabled={isSubmitting}
+                          />
+                        </div>
+                        {validationErrors.confirmPassword && (
+                          <span className="field-error">{validationErrors.confirmPassword}</span>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="institution">Institution</label>
+                        <div className="input-with-icon">
+                          <span className="input-icon">🏫</span>
+                          <input
+                            type="text"
+                            id="institution"
+                            name="institution"
+                            value={formData.institution}
+                            onChange={handleInputChange}
+                            className="form-input"
+                            placeholder="Your university or organization"
+                            disabled={isSubmitting}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="researchArea">Research Area</label>
+                        <div className="input-with-icon">
+                          <span className="input-icon">🔬</span>
+                          <select
+                            id="researchArea"
+                            name="researchArea"
+                            value={formData.researchArea}
+                            onChange={handleInputChange}
+                            className="form-input"
+                            disabled={isSubmitting}
+                          >
+                            <option value="">Select your research area</option>
+                            <option value="astrobiology">Astrobiology</option>
+                            <option value="plant-biology">Plant Biology</option>
+                            <option value="microgravity">Microgravity Research</option>
+                            <option value="radiation-biology">Radiation Biology</option>
+                            <option value="cellular-biology">Cellular Biology</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+                    </>
                   )}
-                </button>
 
-                {isSignUp && (
-                  <div className="terms-notice">
-                    <p>
-                      By creating an account, you agree to our 
-                      <a href="#"> Terms of Service</a> and 
-                      <a href="#"> Privacy Policy</a>.
-                    </p>
+                  {!isSignUp && (
+                    <div className="form-options">
+                      <label className="checkbox-label">
+                        <input type="checkbox" disabled={isSubmitting} />
+                        <span className="checkmark"></span>
+                        Remember me
+                      </label>
+                      <a href="#" className="forgot-password">Forgot password?</a>
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary submit-btn glow"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="loading-text">
+                        <span className="loading-spinner-small"></span>
+                        {isSignUp ? 'Creating Account...' : 'Signing In...'}
+                      </span>
+                    ) : (
+                      isSignUp ? 'Create Account' : 'Sign In'
+                    )}
+                  </button>
+
+                  {isSignUp && (
+                    <div className="terms-notice">
+                      <p>
+                        By creating an account, you agree to our 
+                        <a href="#"> Terms of Service</a> and 
+                        <a href="#"> Privacy Policy</a>.
+                      </p>
+                    </div>
+                  )}
+                </form>
+
+                <div className="social-signin">
+                  <div className="divider">
+                    <span>Or continue with</span>
                   </div>
-                )}
-              </form>
-
-              <div className="social-signin">
-                <div className="divider">
-                  <span>Or continue with</span>
-                </div>
-                <div className="social-buttons">
-                  <button className="social-btn">
-                    <span className="social-icon">🔗</span>
-                    ORCID
-                  </button>
-                  <button className="social-btn">
-                    <span className="social-icon">🎓</span>
-                    Institution SSO
-                  </button>
+                  <div className="social-buttons">
+                    <button className="social-btn orcid-btn">
+                      <span className="social-icon">ID</span>
+                      <span className="social-text">ORCID</span>
+                    </button>
+                    <button className="social-btn institution-btn">
+                      <span className="social-icon">🎓</span>
+                      <span className="social-text">Institution SSO</span>
+                    </button>
+                    <button className="social-btn nasa-btn">
+                      <span className="social-icon">🚀</span>
+                      <span className="social-text">NASA Account</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

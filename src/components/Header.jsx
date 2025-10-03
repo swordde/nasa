@@ -55,7 +55,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
                 className="brand-link"
                 onClick={(e) => handleNavClick('home', e)}
               >
-                <span className="brand-text">NASA Space Biology KG</span>
+                <span className="brand-text">NASA Space </span>
               </button>
             </div>
             

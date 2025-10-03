@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ResourcesPage.css';
 
 const ResourcesPage = () => {
   const [activeTab, setActiveTab] = useState('details');
+  const [tabAnimation, setTabAnimation] = useState(false);
 
   const tabs = [
-    { id: 'details', label: 'Details' },
-    { id: 'resources', label: 'Resources' },
-    { id: 'teams', label: 'Teams' }
+    { id: 'details', label: 'Research Details', icon: '🔬' },
+    { id: 'resources', label: 'Available Resources', icon: '📚' },
+    { id: 'teams', label: 'Research Teams', icon: '👨‍🚀' }
   ];
+
+  // Trigger animation when tab changes
+  useEffect(() => {
+    setTabAnimation(true);
+    const timer = setTimeout(() => setTabAnimation(false), 500);
+    return () => clearTimeout(timer);
+  }, [activeTab]);
 
   return (
     <div className="resources-page">
@@ -60,15 +68,17 @@ const ResourcesPage = () => {
                     key={tab.id}
                     className={`tab ${activeTab === tab.id ? 'active' : ''}`}
                     onClick={() => setActiveTab(tab.id)}
+                    aria-selected={activeTab === tab.id}
                   >
-                    {tab.label}
+                    <span className="tab-icon">{tab.icon}</span>
+                    <span className="tab-label">{tab.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Tab Content */}
-            <div className="tab-content fade-in-up">
+            <div className={`tab-content ${tabAnimation ? 'tab-fade-in' : ''}`}>
               {activeTab === 'details' && (
                 <div className="content-panel">
                   <h3>Research Details</h3>

@@ -39,10 +39,10 @@ const Hero = ({ setCurrentPage }) => {
       </div>
 
       <div className="container">
-        <div className="hero-content">
-          {/* Text content overlaid on image */}
-          <div className="hero-text">
-            <div className="hero-title-container">
+        <div className="hero-content layout-row">
+          {/* Left column: text */}
+          <div className="hero-column hero-text-column">
+            <div className="hero-text-inner">
               <h1 className="hero-title">Enable a New Era of Human Space Exploration</h1>
               <div className="hero-description">
                 <p>
@@ -52,18 +52,29 @@ const Hero = ({ setCurrentPage }) => {
                   enabling researchers to explore experimental impacts and results.
                 </p>
               </div>
-            </div>
-            
-            {/* CTA Button */}
-            <div className="hero-actions">
-              <button 
-                className="btn btn-primary hero-cta"
-                onClick={handleExploreClick}
-              >
-                Explore Research Dashboard
-              </button>
+
+              <div className="hero-actions">
+                <button 
+                  className="btn btn-primary hero-cta"
+                  onClick={handleExploreClick}
+                >
+                  Explore Research Dashboard
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* Right column: small badges / highlights */}
+          <aside className="hero-column hero-side-column" aria-hidden="true">
+            <div className="research-badges side-badges">
+              <div className="research-badge">
+                <span className="badge-text">Space Biology</span>
+              </div>
+              <div className="research-badge">
+                <span className="badge-text">Deep Space Research</span>
+              </div>
+            </div>
+          </aside>
         </div>
         
         {/* Challenge Overview section */}
