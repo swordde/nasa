@@ -64,17 +64,6 @@ const Hero = ({ setCurrentPage }) => {
             </div>
           </div>
 
-          {/* Right column: small badges / highlights */}
-          <aside className="hero-column hero-side-column" aria-hidden="true">
-            <div className="research-badges side-badges">
-              <div className="research-badge">
-                <span className="badge-text">Space Biology</span>
-              </div>
-              <div className="research-badge">
-                <span className="badge-text">Deep Space Research</span>
-              </div>
-            </div>
-          </aside>
         </div>
         
         {/* Challenge Overview section */}

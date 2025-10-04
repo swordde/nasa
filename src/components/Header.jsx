@@ -27,7 +27,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
   };
 
   const handleSignUpClick = () => {
-    setCurrentPage('profile');
+    setCurrentPage('signin');
   };
 
   const handleLogout = async () => {
@@ -88,8 +88,8 @@ const Header = ({ currentPage, setCurrentPage }) => {
                 </li>
                 <li className="nav-item">
                   <button 
-                    className={`nav-link ${currentPage === 'profile' ? 'active' : ''}`}
-                    onClick={(e) => handleNavClick('profile', e)}
+                    className={`nav-link ${currentPage === 'about' ? 'active' : ''}`}
+                    onClick={(e) => handleNavClick('about', e)}
                   >
                     About
                   </button>
@@ -170,7 +170,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
                   className="btn btn-primary sign-up-btn"
                   onClick={handleSignUpClick}
                 >
-                  Sign Up
+                  Sign In
                 </button>
               )}
             </div>
