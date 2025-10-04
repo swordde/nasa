@@ -10,7 +10,6 @@ This document shows how all the components, services, and files work together in
 App.jsx (Root Component)
 ├── Header.jsx (Navigation)
 ├── Hero.jsx (Landing Section)
-├── KnowledgeGraph.jsx (Main Visualization)
 ├── SearchPage.jsx (Search Interface)
 │   ├── Uses: useSearch.js hook
 │   ├── Calls: searchService.js

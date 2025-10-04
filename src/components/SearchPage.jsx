@@ -146,15 +146,24 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="search-page">
+    <section className="search-page">
       <div className="container">
+        <header className="search-page-header">
+          <h1 className="search-page-title">NASA Space Biology Research</h1>
+          <p className="search-page-description">Explore NASA's collection of space biology publications and research data</p>
+        </header>
+        
         <div className="search-layout">
           {/* Sidebar with filters */}
-          <aside className="search-sidebar">
+          <aside className="search-sidebar" aria-label="Search filters">
             <div className="sidebar-section">
               <div className="filter-header">
                 <h3>Filter Results</h3>
-                <button className="clear-filters-btn" onClick={clearAllFilters}>
+                <button 
+                  className="clear-filters-btn" 
+                  onClick={clearAllFilters}
+                  aria-label="Clear all filters"
+                >
                   Clear All
                 </button>
               </div>
@@ -222,25 +231,28 @@ const SearchPage = () => {
           {/* Main content area */}
           <main className="search-main">
             {/* Search header */}
-            <div className="search-header">
-              <div className="search-bar">
+            <header className="search-header">
+              <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
+                <label htmlFor="searchInput" className="visually-hidden">Search publications</label>
                 <input
+                  id="searchInput"
                   type="text"
                   placeholder="Search NASA space biology publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
+                  aria-label="Search NASA space biology publications"
                 />
-                <button className="search-btn">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
+                <button className="search-btn" aria-label="Search">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                   </svg>
                 </button>
-              </div>
+              </form>
               <div className="search-stats">
                 <p>Found <strong>{filteredResults.length}</strong> results {searchQuery && `for "${searchQuery}"`}</p>
               </div>
-            </div>
+            </header>
 
             {/* Active filters display */}
             {(selectedFilters.length > 0 || selectedMissions.length > 0 || dateRange.start || dateRange.end) && (
@@ -300,6 +312,8 @@ const SearchPage = () => {
                     key={result.id} 
                     className="result-card clickable"
                     onClick={() => handleResultClick(result)}
+                    tabIndex="0"
+                    aria-label={`Research article: ${result.title}`}
                   >
                     <div className="result-header">
                       <h3 className="result-title">{result.title}</h3>
@@ -346,7 +360,7 @@ const SearchPage = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
-    </div>
+    </section>
   );
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AuthProvider } from './hooks/useAuth.jsx';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import KnowledgeGraph from './components/KnowledgeGraph';
 import Welcome from './components/Welcome';
 import SearchPage from './components/SearchPage';
 import ResourcesPage from './components/ResourcesPage';
@@ -26,7 +25,6 @@ function App() {
         return (
           <>
             <Hero setCurrentPage={setCurrentPage} />
-            <KnowledgeGraph setCurrentPage={setCurrentPage} />
             <Welcome setCurrentPage={setCurrentPage} />
           </>
         );
